@@ -14,10 +14,10 @@ This document outlines the steps to extract data from PDF files and save it to a
 
 ### 2. Update Configurations in `data_extract.py`
 - Open the `data_extract.py` file in your text editor.
-- Change the following variables:
+- Change the following variables if necessary:
   ```python
   PATH = "path_to_your_data_directory/"   # Set the directory where your data is located
-  OUTPUT_CSV = PATH + "output.csv"  # Specify the path where the output CSV file will be saved
+  OUTPUT_CSV = PATH + "output_table.csv"  # Specify the path where the output CSV file will be saved
   CSV_PATH = PATH + "table.csv"           # Path to the input CSV file
   ```
 - Update the DETAIL_ROWS variable to specify the rows you want to include details in the extraction. Modify it as needed:
@@ -37,13 +37,16 @@ This document outlines the steps to extract data from PDF files and save it to a
 - Alternatively, you can double-click the Ollama app on your desktop (or wherever you downloaded it) to start it.
 - After you run Ollama, In a separate terminal window, navigate to the directory where data_extract.py is located and run the script:
   ```bash
-  python3 data_extract.py
+  python3 data_extractor.py
   ```
 
 ### 5. Monitor the Process
 - You should see the following output in the terminal:
   ```bash
-  Processing row 7/59...
+  Processing row 1/59...
+  Processing row 2/59...
+  Processing row 3/59...
+  Processing row 4/59...
   ```
   This message indicates which row the script is processing now.
 - Once the task is completed, the following message will appear:
