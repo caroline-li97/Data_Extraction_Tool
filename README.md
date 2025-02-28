@@ -9,7 +9,7 @@ This document outlines the steps to extract data from PDF files and save it to a
   - **Download**: Click the **Download** button on the GitHub page to download the repository as a ZIP file.
   - **Clone**: Alternatively, you can clone the repository using the following link:
     ```bash
-    git clone https://github.com/caroline-li97/Data_Extraction_Tool
+    git clone https://github.com/caroline-li97/Data_Extraction_Tool.git
     ```
 
 ### 2. Update Configurations in `data_extract.py`
@@ -45,14 +45,14 @@ This document outlines the steps to extract data from PDF files and save it to a
   ```bash
   Processing row 7/59...
   ```
-  This message indicates which row the script is processing.
+  This message indicates which row the script is processing now.
 - Once the task is completed, the following message will appear:
   ```bash
   Results added to CSV.
   ```
 
 ### 6. Check the Output
-- The processed data will be saved in the CSV file specified in the OUTPUT_CSV path.
+- The processed data will be saved in the CSV file specified in the ```OUTPUT_CSV``` path.
 - You can open the CSV file to verify the extracted results.
 
 ### 7. Troubleshooting
