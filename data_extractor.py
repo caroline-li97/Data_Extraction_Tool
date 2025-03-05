@@ -8,7 +8,8 @@ MODEL_NAME = "llama3.2"
 PATH = "/Users/seven/Downloads/"
 CSV_PATH = PATH + "table.csv"
 OUTPUT_CSV = PATH + "output_table.csv"
-DETAIL_ROWS = set(range(5, 12)) | set(range(54, 60))
+Clinical_Signs_Extraction_DETAIL_ROWS = set(range(4, 11))
+Parameter_Specific_Extraction_Rows = set(range(55, 60))
 
 def extract_text_from_pdf(pdf_path):
     doc = fitz.open(pdf_path)
@@ -26,11 +27,31 @@ def ollama_result_query(text, item):
     ])
     return response['message']['content']
 
-def ollama_detail_query(text, item):
+def Clinical_Signs_Extraction(text, item):
+    Symptom_keywords = {
+        "vomit_nausea": "Vomiting, nausea, regurgitation, emesis",
+        "lethargy_weakness": "Lethargy, weakness, dull, depressed",
+        "appetite_loss": "Inappetence, anorexia, hyporexia, not eating",
+        "diarrhea_melena": "Diarrhea, melena, loose stools, tarry stools",
+        "abdominal_pain": "Abdominal pain, prayer position, cranial abdominal pain",
+        "weight_loss": "Weight loss, cachexia",
+        "duration": ">14 days"
+
+    }
+    prompt1 = f"Based on the text: \"{text}\" identify if {Symptom_keywords[item]} is explicitly mentioned. If yes output 1 only. If no, output 0 only. Output only 1 or 0 with no explanations"
+    if "1" in ollama_detail_query(prompt1):
+        prompt2 = f"Based on the text: \"{text}\", Provide any relevant information or text related to {item}."
+        return 1, ollama_detail_query(prompt2)
+    return 0, None
+
+def Parameter_Specific_Extraction(test, item):
+    return 0, 0
+
+def ollama_detail_query(prompt):
     response: ChatResponse = chat(model=MODEL_NAME, messages=[
     {
         'role': 'user',
-        'content': "Given the following text: \"" + text + "\", extract the exact original text snippet related to " + item + ". Output only the raw extracted text verbatim with no explanations, steps, formatting, or extra text."
+        'content': prompt
     },
     ])
     return response['message']['content']
@@ -45,9 +66,10 @@ def process_csv():
         detail = None
         text = extract_text_from_pdf(PATH + filename + ".pdf")
         result = ollama_result_query(text, item).strip()
-        if index in DETAIL_ROWS:
-            detail = ollama_detail_query(text, item).strip()
-
+        if index in Clinical_Signs_Extraction_DETAIL_ROWS:
+            result, detail = Clinical_Signs_Extraction(text, item)   
+        if index in Parameter_Specific_Extraction_Rows:
+            result, detail = Parameter_Specific_Extraction(text, item)   
         new_df.append({
             'filenames': filename,
             'items': item,
