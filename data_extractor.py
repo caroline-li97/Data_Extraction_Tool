@@ -8,8 +8,8 @@ MODEL_NAME = "llama3.2"
 PATH = "/Users/seven/Downloads/"
 CSV_PATH = PATH + "table.csv"
 OUTPUT_CSV = PATH + "output_table.csv"
-Clinical_Signs_Extraction_DETAIL_ROWS = set(range(5, 11))
-Parameter_Specific_Extraction_Rows = set(range(54, 59))
+Clinical_Signs_Extraction_DETAIL_ROWS = set(range(4, 10))
+Parameter_Specific_Extraction_Rows = set(range(53, 58))
 
 def extract_text_from_pdf(pdf_path):
     doc = fitz.open(pdf_path)
