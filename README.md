@@ -20,9 +20,10 @@ This document outlines the steps to extract data from PDF files and save it to a
   OUTPUT_CSV = PATH + "output_table.csv"  # Specify the path where the output CSV file will be saved
   CSV_PATH = PATH + "table.csv"           # Path to the input CSV file
   ```
-- Update the DETAIL_ROWS variable to specify the rows you want to include details in the extraction. Modify it as needed:
+- Update the ROWS variable to specify the rows you want to include details in the extraction. Modify it as needed:
   ```python
-  DETAIL_ROWS = set(range(5, 12)) | set(range(54, 60)) # rows 6-12 and 55-60
+  Clinical_Signs_Extraction_DETAIL_ROWS = set(range(4, 10))
+  Parameter_Specific_Extraction_Rows = set(range(53, 59))
   ```
 
 ### 3. Download Ollama

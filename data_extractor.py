@@ -9,7 +9,7 @@ PATH = "/Users/seven/Downloads/"
 CSV_PATH = PATH + "table.csv"
 OUTPUT_CSV = PATH + "output_table.csv"
 Clinical_Signs_Extraction_DETAIL_ROWS = set(range(4, 10))
-Parameter_Specific_Extraction_Rows = set(range(53, 58))
+Parameter_Specific_Extraction_Rows = set(range(53, 59))
 
 def extract_text_from_pdf(pdf_path):
     doc = fitz.open(pdf_path)
